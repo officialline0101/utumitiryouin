@@ -1582,22 +1582,14 @@
             const selectedSymptomText = formData.selectedSymptom && formData.selectedSymptom.length > 0
                 ? formData.selectedSymptom.map(item => `・${item.name}`).join('\n')
                 : 'メニュー未選択';
-
-            const EakonmodelNumberText = formData.EakonModelnumber
-                ? `｟エアコン型式番号｠\n${formData.EakonModelnumber}\n`
-                : '';
-
-            const SentakukimodelNumberText = formData.SentakukiModelnumber
-                ? `｟洗濯機型式番号｠\n${formData.SentakukiModelnumber}\n`
-                : '';
-
+                
             const irradiationsText = formData.irradiationsCount
                 ? `≪オプション≫\n${formData.irradiationsCount}\n`
                 : '';
 
             liff.sendMessages([{
                 type: 'text',
-                text: `【ご予約内容】\n\n≪お名前≫：${formData.name}\n\n≪電話番号≫：${formData.phone}\n\n≪住所≫：${formData.tellmetheaddress}\n\n≪性別≫：${formData.visitCount}\n\n≪メニュー≫\n${selectedSymptomText}${EakonmodelNumberText}${SentakukimodelNumberText}\n${irradiationsText}\n【希望日時】\n≪第一希望日≫\n${formatDate(formData.dates[0])}\n\n≪第二希望日≫\n${formatDate(formData.dates[1])}\n\n≪第三希望日≫\n${formatDate(formData.dates[2])}\n\n≪メッセージ≫\n${formData.message}`
+                text: `【ご予約内容】\n\n≪お名前≫：${formData.name}\n\n≪電話番号≫：${formData.phone}\n\n≪住所≫：${formData.tellmetheaddress}\n\n≪性別≫：${formData.visitCount}\n\n≪メニュー≫\n${selectedSymptomText}\n【希望日時】\n≪第一希望日≫\n${formatDate(formData.dates[0])}\n\n≪第二希望日≫\n${formatDate(formData.dates[1])}\n\n≪第三希望日≫\n${formatDate(formData.dates[2])}\n\n≪メッセージ≫\n${formData.message}`
             }]).then(() => {
                 alert('当日キャンセルは無いようにお願いいたします。');
                 liff.closeWindow();
