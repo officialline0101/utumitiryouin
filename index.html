@@ -1060,7 +1060,7 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let visitTimes = {
-            '1回目': 30,
+            '1回目': 0,
             '2回目以降': 0
         };
 
@@ -1532,8 +1532,6 @@
             const formData = {
                 name: document.getElementById('name').value.trim(),
                 phone: document.getElementById('phone').value.trim(),
-                EakonModelnumber: document.getElementById('EakonModelnumber').value.trim(),
-                SentakukiModelnumber: document.getElementById('SentakukiModelnumber').value.trim(),
                 tellmetheaddress: document.getElementById('tellmetheaddress').value.trim(),
                 visitCount: visitCount,
                 selectedMenu: selectedMenu,
