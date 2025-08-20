@@ -975,7 +975,7 @@
                 <span class="highlight-text">◆気導術◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-category="気導術" data-price="8800">ヘッドスパ</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="気導術" data-price="8800">ヘッドスパ＆ストレス遮断</button>
                 <button type="button" onclick="selectSymptom(this)" data-category="気導術" data-price="16500">フェイスアップ</button>
             </div>
         </div>
@@ -987,7 +987,16 @@
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this)" data-category="マツエセラピー" data-price="14300">脳梗塞</button>
                 <button type="button" onclick="selectSymptom(this)" data-category="マツエセラピー" data-price="14300">側湾症</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="マツエセラピー" data-price="14300">捻挫・足底筋膜炎・外反母趾</button>
+                <button type="button" onclick="selectSymptom(this)" data-category="マツエセラピー" data-price="14300">スポーツ選手<br>・<br>ランナーの怪我防止<br>・<br>パフォーマンス向上</button>
                 <button type="button" onclick="selectSymptom(this)" data-category="マツエセラピー" data-price="15400">全身調整</button>
+            </div>
+            <div class="labelhidariyose">
+                <span class="highlight-text">オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ヘッドスパ＆ストレス遮断</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">フェイスアップ</button>
             </div>
         </div>
 
@@ -1139,7 +1148,7 @@
 
             // オプションが選択されていたら、各オプションを改行して表示
             const irradiationsText = irradiationsCount
-                ? `<span style="color:#13ca5e;"><strong>【オプション】</strong></span><br>${irradiationsCount.split(', ').join('<br>')}`
+                ? `<span style="color:#13ca5e;"><strong>【オプション】</strong></span><br>・${irradiationsCount.split(', ').join('<br>・')}`
                 : '・オプション無し';
 
             // 所要時間を計算
@@ -1187,6 +1196,11 @@
         <div class="info-row">
             <p>${selectedSymptomText}</p>
             <button class="edit-button" onclick="scrollToElement('beautifuleyebrows'); scrollToElement('shinyskin'); scrollToElement('Cosmetologyasawhole');">修正する</button>
+        </div>
+        <hr>
+        <div class="info-row">
+            <p>${irradiationsText}</p>
+            <button class="edit-button" onclick="scrollToElement('firstirradiations')">修正</button>
         </div>
         <hr>
         <div class="info-row">
@@ -1582,12 +1596,12 @@
                 : 'メニュー未選択';
                 
             const irradiationsText = formData.irradiationsCount
-                ? `≪オプション≫\n${formData.irradiationsCount}\n`
+                ? `\n≪オプション≫\n${formData.irradiationsCount}\n`
                 : '';
 
             liff.sendMessages([{
                 type: 'text',
-                text: `【ご予約内容】\n\n≪お名前≫：${formData.name}\n\n≪電話番号≫：${formData.phone}\n\n≪性別≫：${formData.visitCount}\n\n≪メニュー≫\n${selectedSymptomText}\n≪お悩みの症状≫：${formData.tellmetheaddress}\n\n【希望日時】\n≪第一希望日≫\n${formatDate(formData.dates[0])}\n\n≪第二希望日≫\n${formatDate(formData.dates[1])}\n\n≪第三希望日≫\n${formatDate(formData.dates[2])}\n\n≪メッセージ≫\n${formData.message}`
+                text: `【ご予約内容】\n\n≪お名前≫：${formData.name}\n\n≪電話番号≫：${formData.phone}\n\n≪性別≫：${formData.visitCount}\n\n≪メニュー≫\n${selectedSymptomText}${irradiationsText}\n≪お悩みの症状≫\n${formData.tellmetheaddress}\n\n【希望日時】\n≪第一希望日≫\n${formatDate(formData.dates[0])}\n\n≪第二希望日≫\n${formatDate(formData.dates[1])}\n\n≪第三希望日≫\n${formatDate(formData.dates[2])}\n\n≪メッセージ≫\n${formData.message}`
             }]).then(() => {
                 alert('当日キャンセルは無いようにお願いいたします。');
                 liff.closeWindow();
